@@ -39,7 +39,17 @@ int main()
         graph[x][y]=1;
         graph[y][x]=1;
     }
-    if(dfs(0,-1))cout<<"Cycle"<<endl;
+    int x=0;
+    for(int i=0;i<V;i++){
+        if(visited[i]==false){
+            if(dfs(i,-1)){
+                int x=1;
+                break;
+            }
+        }
+    }
+    if(x) cout<<"Cycle"<<endl;
     else cout<<"No cycle"<<endl;
+
     return 0;
 }
