@@ -55,21 +55,14 @@ void Pop(){
     node *pop=StackBST(root);
     node *popParent=pop->parent;
     if(popParent==NULL) return;
-    int p = popParent->left->data;
-    int q= pop->data;
-    if(p == q){
+    if(popParent->left!=NULL&& popParent->left->data == pop->data){
         popParent->left=NULL;
     }
     else{
         popParent->right=NULL;
     }
-    pop=NULL;
-    delete pop;   ///IMPORTANT!!!!
+    free(pop);   ///IMPORTANT!!!!
     flag--;
-//    pop->parent=NULL;
-//    free(pop);
-//    pop->parent=NULL;
-//    delete(pop);
 }
 int main()
 {
