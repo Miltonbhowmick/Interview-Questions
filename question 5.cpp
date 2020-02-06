@@ -20,7 +20,7 @@ bool isSafe(int x,int y,int n){
     return false;
 }
 bool MazeFind(int x,int y, int n){
-    if(x==n-1&&y==n-1){
+    if(x==n-1&&y==n-1&&graph[x][y]){
         path[x][y]=1;
         return true;
     }
