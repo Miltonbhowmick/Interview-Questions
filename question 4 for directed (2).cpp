@@ -1,23 +1,25 @@
 #include<iostream>
 #define MAX 1000
 using namespace std;
-int v,e,grid[MAX][MAX],path[MAX];
+int v,e,grid[MAX][MAX],path[MAX],last;
 bool rec_stack[MAX],vis[MAX];
 bool dfs(int u){
-//    if(vis[u]==false){
         vis[u]=true;
         rec_stack[u]=true;
         for(int i=0;i<v;i++){
             if(grid[u][i]){
                 if(vis[i]==false){
-                    if(dfs(i))
+                    if(dfs(i)){
+                        path[i]=u;
                         return true;
+                    }
                 }
-                else if(rec_stack[i]==true)
+                else if(rec_stack[i]==true){
+                    last=u;
                     return true;
+                }
             }
         }
-//    }
     rec_stack[u]=false;
     return false;
 }
@@ -30,13 +32,22 @@ int main()
         grid[x][y]=1;
     }
     bool ck=false;
+    int node=-1;
     for(int i=0;i<v;i++){
         if(vis[i]==false && dfs(i)){
             ck=true;
+            node=i;
             break;
         }
     }
-    if(ck) cout<<"Cycle"<<endl;
+    if(ck){
+        cout<<last<<" ";
+        while(last!=node){
+            last=path[last];
+            cout<<last<<" ";
+        }
+        cout<<"Cycle"<<endl;
+    }
     else cout<<"No cycle"<<endl;
     return 0;
 }
