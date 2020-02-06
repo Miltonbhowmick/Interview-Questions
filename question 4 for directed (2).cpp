@@ -1,7 +1,7 @@
 #include<iostream>
 #define MAX 1000
 using namespace std;
-int v,e,grid[MAX][MAX],path[MAX],last;
+int v,e,grid[MAX][MAX],path[MAX],cycle_end,cycle_start;
 bool rec_stack[MAX],vis[MAX];
 bool dfs(int u){
         vis[u]=true;
@@ -15,7 +15,8 @@ bool dfs(int u){
                     }
                 }
                 else if(rec_stack[i]==true){
-                    last=u;
+                    cycle_end=u;
+                    cycle_start=i;
                     return true;
                 }
             }
@@ -32,19 +33,17 @@ int main()
         grid[x][y]=1;
     }
     bool ck=false;
-    int node=-1;
     for(int i=0;i<v;i++){
         if(vis[i]==false && dfs(i)){
             ck=true;
-            node=i;
             break;
         }
     }
     if(ck){
-        cout<<last<<" ";
-        while(last!=node){
-            last=path[last];
-            cout<<last<<" ";
+        cout<<cycle_end<<" ";
+        while(cycle_end!=cycle_start){
+            cycle_end=path[cycle_end];
+            cout<<cycle_end<<" ";
         }
         cout<<"Cycle"<<endl;
     }
