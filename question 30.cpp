@@ -1,3 +1,15 @@
+/*
+4
+0 1 1 1
+1 1 2 1
+0 1 0 1
+1 2 1 2
+3
+1 2
+3 1
+3 3
+*/
+
 #include<iostream>
 #include<cstdio>
 #include<climits>
@@ -83,7 +95,7 @@ int MinPath(){
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
             if(grid[i][j]==1){
-                reset();
+                reset(); /// IMPORTANT!!
                 Cell src;
                 src.x=i;
                 src.y=j;
