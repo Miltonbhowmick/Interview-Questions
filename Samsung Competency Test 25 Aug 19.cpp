@@ -34,6 +34,7 @@ using namespace std;
 
 #define INT_MAX 100000;
 
+int N,M;
 int xb,yb,xt,yt;
 int dp[1001][1001];
 int fun(int dp[][1001], int N, int M, int k){
@@ -41,6 +42,7 @@ int fun(int dp[][1001], int N, int M, int k){
 	for(int i=0; i<=N-k; i++){
 		for(int j=0; j<=M-k; j++){
 			int sum = dp[i+k][j+k]-dp[i+k][j]-dp[i][j+k]+dp[i][j];
+            cout<<sum<<" "<<dp[i+k][j+k]<<" "<<dp[i+k][j]<<" "<<dp[i][j+k]<<" "<<dp[i][j]<<endl;
 			if(sum < msum){
 				msum = sum;
 				if(msum <=1){
@@ -54,12 +56,18 @@ int fun(int dp[][1001], int N, int M, int k){
 	}
 	return msum;
 }
-
+void print()
+{
+    for(int i=1;i<=N;i++){
+        for(int j=1;j<=M;j++)
+            cout<<dp[i][j]<<" ";
+        cout<<endl;
+    }
+}
 int main() {
 //	ios_base::sync_with_stdio(0);
 //	cin.tie(0);
 	/* input */
-	int N,M;
 	cin>>N>>M;
 	int A[N][M];
 	for(int i=0; i<N; i++){
@@ -81,17 +89,33 @@ int main() {
 			dp[i][j]=0;
 		}
 	}
+	for(int i=1;i<=N;i++){
+        for(int j=1;j<=N;j++)
+            cout<<dp[i][j]<<" ";
+        cout<<endl;
+    }
 	for(int i=1; i<=N; i++){
 		for(int j=1; j<=M; j++){
+            print();
+            cout<<"--"<<endl;
+            cout<<dp[i-1][j]<<" "<<dp[i][j-1]<<" "<<dp[i-1][j-1]<<" "<<A[i-1][j-1]<<endl;
 			dp[i][j] = dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]+A[i-1][j-1];
+            print();
+            cout<<"++"<<endl;
 		}
 	}
+    for(int i=1;i<=N;i++){
+        for(int j=1;j<=N;j++)
+            cout<<dp[i][j]<<" ";
+        cout<<endl;
+    }
 	/* applying binary search */
 	int l=1, r=min(M,N);
 	int ones;
 	while(l<r){
 		int mid = (l+r)/2;
 		ones = fun(dp,N,M,mid);
+		cout<<l<<"==="<<r<<endl;
 		//if no. of ones > 1 means we need to decrease the submatix size
 		if(ones >1){
 			r = mid;
