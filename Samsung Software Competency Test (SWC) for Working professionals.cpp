@@ -90,7 +90,7 @@ int main()
     int t;
     cin>>t;
     while(t--){
-        cin>>n>>trgt;
+        cin>>n;
         for(int i=0;i<n;i++){
             int a,b,c;
             cin>>a>>b>>c;
@@ -99,10 +99,10 @@ int main()
         }
         MergeSort(0,n-1);
 
-    for(int i=0;i<n;i++)
-        cout<<idg_sum[i][0]<<" "<<idg_sum[i][1]<<endl;
+//    for(int i=0;i<n;i++)
+//        cout<<idg_sum[i][0]<<" "<<idg_sum[i][1]<<endl;
 
-        for(int i=0;i<trgt;i++){
+        for(int i=0;i<3;i++){
             int a,b,c;
             cin>>a>>b>>c;
             target[i]=a+b+c;
