@@ -1,4 +1,4 @@
-# practice-srd
+# Samsung R&B
 
 https://github.com/rsenwar/Samsung-Interview-Problems
 
